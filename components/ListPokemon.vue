@@ -12,7 +12,7 @@
       id="my-table"
       striped
       hover
-      :items="items"
+      :items="pokemons"
       :per-page="perPage"
       :current-page="currentPage"
     />
@@ -28,22 +28,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, namespace } from 'nuxt-property-decorator'
+import { Pokemon } from '~/utils/pokeInterface'
+const pokemon = namespace('pokemon')
 
 @Component
 export default class ListPokemon extends Vue {
   perPage: number = 20
   currentPage: number = 1
 
-  items: Array<object> = [
-    {
-      name: 'poke1',
-      sprite: 'urlImage'
-    },
-    {
-      name: 'poke2',
-      sprite: 'urlImage'
-    }
-  ]
+  @pokemon.State
+  public pokemons!: Pokemon[]
+
+  @pokemon.Action
+  public getPokemonData!: () => void
+
+  async mounted () {
+    await this.getPokemonData()
+  }
+
+  // computed
+  get rows () {
+    return this.pokemons.length
+  }
 }
 </script>
