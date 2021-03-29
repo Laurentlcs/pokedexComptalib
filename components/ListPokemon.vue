@@ -29,6 +29,9 @@
 
       <template #cell(action)="row">
         <b-button-group>
+          <b-button variant="success" @click="addToTeam(row)">
+            Add team
+          </b-button>
           <b-button variant="info" @click="goToDetail(row)">
             More info
           </b-button>
@@ -85,6 +88,12 @@ export default class ListPokemon extends Vue {
       path: '/pokemon',
       query: row.item
     })
+  }
+
+  @Emit()
+  addToTeam (row: any) {
+    // eslint-disable-next-line no-console
+    console.log(row)
   }
 }
 </script>

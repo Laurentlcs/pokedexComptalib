@@ -4,8 +4,7 @@
       <Header />
     </div>
     <div class="teamBanner">
-      <!-- TeamBanner Component -->
-      <h3>TEAM-BANNER</h3>
+      <TeamBanner />
     </div>
     <Nuxt />
   </div>
@@ -14,9 +13,10 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import Header from '~/components/Header.vue'
+import TeamBanner from '~/components/TeamBanner.vue'
 
 @Component({
-  components: { Header }
+  components: { Header, TeamBanner }
 })
 
 export default class Layout extends Vue {}
@@ -34,10 +34,10 @@ export default class Layout extends Vue {}
 
 .header {
   grid-area: 1 / 1 / 2 / 6;
+  max-height: 8vh;
 }
 
 .teamBanner {
   grid-area: 2 / 1 / 3 / 6;
-  background-color: blue;
 }
 </style>
