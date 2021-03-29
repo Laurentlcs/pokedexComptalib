@@ -19,7 +19,7 @@ import Header from '~/components/Header.vue'
   components: { Header }
 })
 
-export default class Home extends Vue {}
+export default class Layout extends Vue {}
 </script>
 
 <style>
