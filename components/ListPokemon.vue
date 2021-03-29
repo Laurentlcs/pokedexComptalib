@@ -8,14 +8,25 @@
       style="justify-content: center"
     />
 
+    <b-form-input v-model="pokeSearch" size="lg" placeholder="Rechercher" />
+
     <b-table
       id="my-table"
       striped
       hover
-      :items="pokemons"
+      :items="pokeSearch.length ? pokeFiltered : pokemons"
+      :fields="fieldsDisplayed"
       :per-page="perPage"
       :current-page="currentPage"
-    />
+    >
+      <template #cell(name)="data">
+        <b>{{ data.item.name.toUpperCase() }}</b>
+      </template>
+
+      <template #cell(sprite)="data" style="background-color: blue">
+        <img :src="data.item.sprite" width="60" :alt="data.item.name + '_img'">
+      </template>
+    </b-table>
 
     <b-pagination
       v-model="currentPage"
@@ -36,6 +47,8 @@ const pokemon = namespace('pokemon')
 export default class ListPokemon extends Vue {
   perPage: number = 20
   currentPage: number = 1
+  pokeSearch: string = ''
+  fieldsDisplayed: Array<String> = ['name', 'sprite']
 
   @pokemon.State
   public pokemons!: Pokemon[]
@@ -50,6 +63,11 @@ export default class ListPokemon extends Vue {
   // computed
   get rows () {
     return this.pokemons.length
+  }
+
+  // search filter
+  get pokeFiltered () {
+    return this.pokemons.filter(poke => poke.name.includes(this.pokeSearch.toLowerCase()))
   }
 }
 </script>
