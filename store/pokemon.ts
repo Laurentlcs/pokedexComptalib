@@ -1,5 +1,5 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import { Pokemon } from '~/utils/pokeInterface'
+import { Pokemon, PokemonTeam } from '~/utils/pokeInterface'
 
 @Module({
   stateFactory: true,
@@ -8,10 +8,21 @@ import { Pokemon } from '~/utils/pokeInterface'
 
 export default class PokemonModule extends VuexModule {
   pokemons: Pokemon[] = []
+  teamPokemon: PokemonTeam[] = []
 
   @Mutation
   public SET_POKEMON_LIST (pokemons: Pokemon[]) {
     this.pokemons = pokemons
+  }
+
+  @Mutation
+  public ADD_POKEMON_TEAM (pokemon: Pokemon) {
+    this.teamPokemon.push(pokemon)
+  }
+
+  @Mutation
+  public DEL_POKEMON_TEAM (index: number) {
+    this.teamPokemon.splice(index, 1)
   }
 
   @Action({ rawError: true })

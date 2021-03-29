@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Emit } from 'nuxt-property-decorator'
-import { Pokemon } from '~/utils/pokeInterface'
+import { Pokemon, PokemonTeam } from '~/utils/pokeInterface'
 const pokemon = namespace('pokemon')
 
 @Component
@@ -61,11 +61,20 @@ export default class ListPokemon extends Vue {
   pokeSearch: string = ''
   fieldsDisplayed: Array<String> = ['name', 'sprite', 'action']
 
+  // State
   @pokemon.State
   public pokemons!: Pokemon[]
 
+  @pokemon.State
+  public teamPokemon!: PokemonTeam[]
+
+  // Action
   @pokemon.Action
   public getPokemonData!: () => void
+
+  // Mutation
+  @pokemon.Mutation
+  public ADD_POKEMON_TEAM!: (pokemon: Pokemon) => void
 
   async mounted () {
     await this.getPokemonData()
@@ -92,8 +101,9 @@ export default class ListPokemon extends Vue {
 
   @Emit()
   addToTeam (row: any) {
-    // eslint-disable-next-line no-console
-    console.log(row)
+    if (this.teamPokemon.length < 6) {
+      this.ADD_POKEMON_TEAM(row.item)
+    }
   }
 }
 </script>

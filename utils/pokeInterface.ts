@@ -8,3 +8,8 @@ export interface Pokemon {
   sprite: String,
   details: PokemonDetail
 }
+
+export interface PokemonTeam {
+  name: String,
+  sprite: String,
+}
