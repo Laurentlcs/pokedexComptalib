@@ -26,6 +26,14 @@
       <template #cell(sprite)="data" style="background-color: blue">
         <img :src="data.item.sprite" width="60" :alt="data.item.name + '_img'">
       </template>
+
+      <template #cell(action)="row">
+        <b-button-group>
+          <b-button variant="info" @click="goToDetail(row)">
+            More info
+          </b-button>
+        </b-button-group>
+      </template>
     </b-table>
 
     <b-pagination
@@ -39,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace } from 'nuxt-property-decorator'
+import { Component, Vue, namespace, Emit } from 'nuxt-property-decorator'
 import { Pokemon } from '~/utils/pokeInterface'
 const pokemon = namespace('pokemon')
 
@@ -48,7 +56,7 @@ export default class ListPokemon extends Vue {
   perPage: number = 20
   currentPage: number = 1
   pokeSearch: string = ''
-  fieldsDisplayed: Array<String> = ['name', 'sprite']
+  fieldsDisplayed: Array<String> = ['name', 'sprite', 'action']
 
   @pokemon.State
   public pokemons!: Pokemon[]
@@ -68,6 +76,15 @@ export default class ListPokemon extends Vue {
   // search filter
   get pokeFiltered () {
     return this.pokemons.filter(poke => poke.name.includes(this.pokeSearch.toLowerCase()))
+  }
+
+  // methods
+  @Emit()
+  goToDetail (row: any) {
+    this.$router.push({
+      path: '/pokemon',
+      query: row.item
+    })
   }
 }
 </script>

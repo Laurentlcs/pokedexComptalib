@@ -17,8 +17,6 @@ export default class Home extends Vue {}
 <style scoped>
 .listPokemon {
   grid-area: 3 / 1 / 6 / 6;
-  max-height: 10rem;
+  max-height: 10vh;
 }
-</style>>
-
 </style>
