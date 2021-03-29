@@ -1,8 +1,7 @@
 <template>
   <div class="parent">
     <div class="header">
-      <!-- Header Component -->
-      <h3>HEADER</h3>
+      <Header />
     </div>
     <div class="teamBanner">
       <!-- TeamBanner Component -->
@@ -11,6 +10,17 @@
     <Nuxt />
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import Header from '~/components/Header.vue'
+
+@Component({
+  components: { Header }
+})
+
+export default class Home extends Vue {}
+</script>
 
 <style>
 .parent {
@@ -24,7 +34,6 @@
 
 .header {
   grid-area: 1 / 1 / 2 / 6;
-  background-color: red;
 }
 
 .teamBanner {
