@@ -1,5 +1,5 @@
 <template>
-  <div v-if="teamPokemon.length" class="d-flex flex-wrap justify-content-center">
+  <div v-if="teamPokemon.length" class="d-flex flex-wrap justify-content-center mt-4">
     <div v-for="(poke, index) in teamPokemon" :key="index" class="pokeCard d-flex flex-column align-items-center ml-2 mb-2">
       <div class="d-flex justify-content-end" style="width: 100%">
         <b-icon icon="x-circle-fill" style="color: #dc3444;" @click="removeFromTeam(index)" />
